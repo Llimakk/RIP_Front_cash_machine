@@ -1,0 +1,73 @@
+
+header {
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Убедитесь, что он находится над всем контентом */
+    background-color: #f8f9fa; /* Фон для header, чтобы контент под ним не был виден */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для отделения */
+    border-bottom: 2px solid #dcdcdc;
+    padding: 10px 0; /* Увеличьте отступы, если нужно */
+}
+
+
+body {
+    padding-top: 20px; 
+}
+
+
+/* Navbar */
+.header-navbar {
+    padding: 10px 0;
+}
+
+
+.header-logo {
+    width: 50px; /* Размер логотипа */
+    height: auto;
+    margin-right: 50px;
+}
+
+/* Ссылки в навигации */
+.nav-link-custom {
+    color: #007bff; /* Основной цвет ссылок */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+}
+
+.nav-link-custom:hover {
+    color: #0056b3; /* Темный синий при наведении */
+    text-shadow: 0 0 8px rgba(0, 91, 187, 0.4); /* Эффект свечения */
+    font-weight: bold;
+}
+
+/* Текущая активная ссылка */
+.nav-link-custom.active {
+    color: #28a745; /* Зеленый для текущей страницы */
+    font-weight: bold;
+    border-bottom: 2px solid #28a745; /* Подчеркивание */
+}
+
+/* Навигационные элементы */
+.nav-item-custom {
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.nav-item-custom:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Легкий фон при наведении */
+}
+
+/* 
+@media (max-width: 768px) {
+    .header-navbar {
+        flex-direction: column;
+    }
+
+    .nav-item-custom {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+} */
