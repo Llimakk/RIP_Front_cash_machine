@@ -11,28 +11,18 @@ interface BillCardProps {
 
 const BillCard = ({ bill, isMock }: BillCardProps) => {
     return (
-        <Card className="card-custom">
-            {/* Обертка для изображения */}
-            <div className="card-img-wrapper">
-                <CardImg 
-                    src={isMock ? mockImage : bill.image} 
-                    className="card-img-custom" 
-                    alt={bill.name || "Купюра"} 
+        <div className="bills">
+            {/* Ссылка с изображением */}
+            <Link to={`/bills/${bill.bill_id}`}>
+                <img
+                    src={isMock ? mockImage : bill.image}
+                    className="image-bills"
+                    alt={bill.name || "Купюра"}
                 />
-            </div>
-            {/* Тело карточки */}
-            <CardBody className="d-flex flex-column justify-content-between">
-                <CardTitle tag="h5" className="card-title-custom"> 
-                    {bill.name} 
-                </CardTitle>
-                {/* Кнопка для перехода на страницу */}
-                <Link to={`/bills/${bill.bill_id}`}>
-                    <Button className="button-custom">
-                        Подробнее
-                    </Button>
-                </Link>
-            </CardBody>
-        </Card>
+            </Link>
+            {/* Название купюры */}
+            <p className="bill-name">{bill.name}</p>
+        </div>
     );
 };
 

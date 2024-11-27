@@ -1,69 +1,46 @@
-/* Общий стиль карточки */
-.card-custom {
-    width: 100%; /* Используем всю ширину родительского контейнера */
-    max-width: 450px; /* Ограничиваем максимальную ширину карточки */
-    margin: 15px auto; /* Центрируем карточки и задаем отступ */
-    border-radius: 12px; /* Скругленные углы */
-    overflow: hidden; /* Обрезаем элементы, выходящие за границы */
-    box-shadow: 0 4px 6px rgba(150, 190, 155, 0.1); /* Легкая тень */
-    transition: transform 0.2s, box-shadow 0.2s; /* Анимация */
-}
-
-.card-custom:hover {
-    transform: translateY(-5px); /* Приподнимаем карточку при наведении */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Увеличиваем тень */
-}
-
-/* Обертка для изображения */
-.card-img-wrapper {
-    width: 100%; /* Используем всю ширину карточки */
-    height: 250px; /* Фиксированная высота для изображения */
-    overflow: hidden; /* Обрезаем выходящее за границы изображение */
+.bills {
+    border-radius: 20px;
+    background-color: #FFF;
+    padding: 2%;
+    margin-top: 20px;
+    width: 350px;
+    height: 170px;
     display: flex;
-    align-items: center; /* Центрируем изображение по вертикали */
-    justify-content: center; /* Центрируем изображение по горизонтали */
-    background-color: #f8f9fa; /* Светлый фон */
-    border-bottom: 1px solid #ddd; /* Разделительная линия */
+    justify-content: space-between;
+    flex-direction: column;
 }
 
-/* Изображение */
-.card-img-custom {
-    width: 100%; /* Изображение растягивается по ширине */
-    height: auto; /* Высота автоматически подстраивается */
-    max-height: 100%; /* Изображение не превышает размеры обертки */
-    object-fit: contain; /* Сохраняем пропорции изображения */
-    padding: 10px; /* Отступ внутри обертки */
+.image-bills {
+    width: 300px;
+    height: 120px;
+    margin-top: 1px;
+    margin-left: 25px;
+    margin-right: auto;
 }
 
-/* Заголовок */
-.card-title-custom {
-    font-size: 1.2rem; /* Увеличенный размер шрифта */
-    font-weight: bold;
-    color: #333; /* Темный текст */
-    text-align: center;
-    margin-bottom: 15px;
-    margin-top: 10px;
+.bill-name {
+    font-size: 18px;
+    display: flex;
+    margin-top: 4%;
+    font-weight: 500;
+    margin-left: 25px;
+    font-family: SBSans, Arial, Helvetica, sans-serif;
 }
 
-/* Кнопка */
-.button-custom {
-    background-color: #007bff; /* Синий цвет кнопки */
-    color: #fff; /* Белый текст */
+.lin {
+    display: flex;
+    flex-direction: row;
+}
+
+.picking {
+    width: 37px;
+    height: 37px;
+    margin-left: 80px;
+}
+
+.add-to-cart-button {
+    background: none;
     border: none;
-    border-radius: 8px;
-    width: 100%; /* Кнопка растягивается на всю ширину */
-    padding: 10px 0;
-    font-size: 1rem;
-    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-    margin-top: auto; /* Кнопка прижимается вниз */
+    padding: 0;
+    cursor: pointer;
 }
-
-.button-custom:hover {
-    background-color: #0056b3; /* Темно-синий цвет при наведении */
-    transform: scale(1.03); /* Легкое увеличение */
-}
-
-.button-custom:active {
-    transform: scale(0.98); /* Легкое уменьшение при клике */
-}
-
