@@ -13,9 +13,9 @@ const BillCard = ({ bill, isMock }: BillCardProps) => {
     return (
         <div className="bills">
             {/* Ссылка с изображением */}
-            <Link to={`/bills/${bill.bill_id}`}>
+            <Link to={`/bills/${bill.id}`}>
                 <img
-                    src={isMock ? mockImage : bill.image}
+                    src={isMock ? mockImage as string : bill.image}
                     className="image-bills"
                     alt={bill.name || "Купюра"}
                 />

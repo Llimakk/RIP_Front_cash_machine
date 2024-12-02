@@ -4,6 +4,7 @@ import BillCard from "../../components/BillCard";
 import { BillMocks } from "../../modules/mocks";
 import { FormEvent, useEffect } from "react";
 import * as React from "react";
+// import { useSelector, useDispatch } from "react-redux";
 import './index.css';
 
 type BillsPageProps = {
@@ -19,7 +20,7 @@ const BillsPage = ({ bills, setBills, isMock, setIsMock, billName, setBillName }
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`/api/bills/search?name=${billName}`, { signal: AbortSignal.timeout(1000) });
+            const response = await fetch(`/api/bills/search/?bill_name=${billName.toLowerCase()}`, { signal: AbortSignal.timeout(1000) });
             const data = await response.json();
             setBills(data.bills);
             setIsMock(false);
@@ -65,7 +66,7 @@ const BillsPage = ({ bills, setBills, isMock, setIsMock, billName, setBillName }
             </Row>
             <Row>
                 {bills?.map((bill) => (
-                    <Col key={bill.bill_id} xs="12" sm="6" md="4" className="bill-card-col">
+                    <Col key={bill.id} xs="12" sm="6" md="4" className="bill-card-col">
                         <BillCard bill={bill} isMock={isMock} />
                     </Col>
                 ))}

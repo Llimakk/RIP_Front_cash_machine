@@ -1,5 +1,5 @@
 export type T_Bill = {
-    bill_id: number,
+    id: number,
     name: string,
     status: number,
     image: string,

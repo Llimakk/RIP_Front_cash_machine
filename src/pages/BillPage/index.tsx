@@ -29,7 +29,7 @@ const BillPage = ({selectedBill, setSelectedBill, isMock, setIsMock}: BillPagePr
 
     const createMock = () => {
         setIsMock(true)
-        setSelectedBill(BillMocks.find(Bill => Bill?.bill_id == parseInt(id as string)) as T_Bill)
+        setSelectedBill(BillMocks.find(Bill => Bill?.id == parseInt(id as string)) as T_Bill)
     }
 
     useEffect(() => {
@@ -59,6 +59,7 @@ const BillPage = ({selectedBill, setSelectedBill, isMock, setIsMock}: BillPagePr
                         src={isMock ? mockImage as string : selectedBill.image}
                         className="w-100"
                     />
+                    <p className="fs-5">Дата ввода в обращение: {selectedBill.year}.</p>
                 </Col>
                 <Col md="6">
                     <h1 className="mb-3">{selectedBill.name}</h1>
@@ -66,7 +67,7 @@ const BillPage = ({selectedBill, setSelectedBill, isMock, setIsMock}: BillPagePr
                     {selectedBill.description.split("t").map((desc, index) => (
                     <li key={index} className="fs-5">{desc}</li>
                     ))}
-                    <p className="fs-5">Дата ввода в обращение: {selectedBill.year}.</p>
+                    
                 </Col>
             </Row>
         </Container>

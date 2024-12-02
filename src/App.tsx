@@ -18,10 +18,10 @@ function App() {
     return (
         <div className="wrapper">
             <Header />
-            <Container className="pt-4">
-                <Row className="mb-3">
+            <Container className="pt-1 pe-2 pb-0">
+                {/* <Row className="mb-3">
                     <Breadcrumbs currentBill={currentBill} />
-                </Row>
+                </Row> */}
                 <Row>
                     <Routes>
                         <Route path="/" element={<HomePage />} />
