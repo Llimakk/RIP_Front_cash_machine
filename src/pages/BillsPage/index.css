@@ -1,0 +1,40 @@
+/* Основной контейнер страницы */
+.container-custom-3 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+  
+  /* Стили для строки поиска */
+.search-input-3 {
+    border: 1px solid #ced4da; /* Светло-серая рамка */
+    border-radius: 0.375rem; /* Закругленные углы */
+    padding: 0.5rem 1rem; /* Внутренние отступы */
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+  
+.search-input-3:focus {
+    border-color: #007bff; /* Синяя рамка при фокусе */
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+  
+.search-button-3 {
+    border-radius: 0.375rem; /* Закругленные углы */
+    font-size: 1rem;
+    padding: 0.5rem 1rem; /* Внутренние отступы */
+}
+  
+  /* Ряд с карточками */
+.bill-card-col-3 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem; /* Отступ между строками карточек */
+}
+  
+  /* Центровка содержимого */
+.bill-card-col-3 .card-custom-3 {
+    max-width: 300px; /* Ограничиваем ширину карточек */
+    width: 100%;
+}
+  

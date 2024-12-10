@@ -1,0 +1,21 @@
+{
+  "name": "Cash machine",
+  "short_name": "Cash machine",
+  "start_url": "/Front_cash_machine/",
+  "display": "standalone",
+  "background_color": "#fdfdfd",
+  "theme_color": "#fdfdfd",
+  "orientation": "portrait-primary",
+  "icons": [
+      {
+          "src": "/logo.png",
+          "type": "image/png",
+          "sizes": "192x192"
+      },
+      {
+          "src": "/logo.png",
+          "type": "image/png",
+          "sizes": "512x512"
+      }
+  ]
+}

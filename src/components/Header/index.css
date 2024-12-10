@@ -1,0 +1,76 @@
+/* Сбрасываем отступы у body и html */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f1f5f7; /* Цвет фона страницы */
+}
+  
+  /* Общий стиль для хедера */
+.header-5 {
+    width: 100%;
+    position: relative; /* Чтобы можно было задавать высоту или позицию, если нужно */
+}
+  
+.upper-5 {
+    width: 100%;
+    height: 75px; /* Высота полосы */
+    background-color: #8ceca5; /* Зелёный фон */
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень */
+    margin: 0;
+    padding: 0;
+}
+  
+  /* Контейнер содержимого */
+.header-content-5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Ограничение ширины */
+    padding: 0 20px; /* Внутренние отступы */
+}
+  
+  /* Логотип */
+.header-logo-container-5 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+  
+.header-logo-5 {
+    width: 50px; /* Ширина логотипа */
+    height: 50px; /* Высота логотипа */
+    object-fit: contain; /* Подгонка изображения */
+}
+  
+.header-nav-5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Занимает всю высоту зелёной полосы */
+}
+  
+  /* Ссылка на "Купюры" */
+.nav-link-5 {
+    font-size: 50px; /* Увеличиваем размер шрифта */
+    font-weight: bold; /* Делаем шрифт жирным */
+    color: #000000; /* Чёрный цвет текста */
+    font-family: SBSans, Arial, Helvetica, sans-serif; /* Используем стильный шрифт */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    text-align: center; /* Центрируем текст */
+}
+  
+.nav-link-5:hover {
+    color: #0056b3; /* Синий при наведении */
+    text-shadow: 0 0 8px rgba(0, 91, 187, 0.4); /* Легкий эффект свечения */
+}
+  
+.nav-link-5.active {
+    color: #28a745; /* Зеленый для текущей страницы */
+    border-bottom: none; /* Убираем подчёркивание */
+}
+  
