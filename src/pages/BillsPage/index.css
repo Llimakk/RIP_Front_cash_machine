@@ -49,3 +49,11 @@
   max-width: 300px; /* Ограничиваем ширину карточек */
   width: 100%;
 }
+
+@media (max-width: 576px) {
+  .bill-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* По умолчанию одна колонка */
+    gap: 1rem;
+  }
+}

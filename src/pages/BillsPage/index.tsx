@@ -66,13 +66,13 @@ const BillsPage = ({ bills, setBills, isMock, setIsMock }: BillsPageProps) => {
                     </Form>
                 </Col>
             </Row>
-            <div className="bill-grid">
+            <Row className="bill-grid gx-3 gy-4">
                 {bills?.map((bill) => (
-                    <div key={bill.id} className="bill-card-col-3">
+                    <Col key={bill.id} xs="12" sm="6" md="4" lg="3" className="bill-card">
                         <BillCard bill={bill} isMock={isMock} />
-                    </div>
+                    </Col>
                  ))}
-            </div>
+            </Row>
         </Container>
     );   
 };
