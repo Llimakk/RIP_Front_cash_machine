@@ -10,20 +10,20 @@ interface BillCardProps {
 }
 
 const BillCard = ({ bill, isMock }: BillCardProps) => {
-    return (
-        <div className="bills-6">
-          {/* Ссылка с изображением */}
-          <Link to={`/bills/${bill.id}`}>
+  return (
+    <div className="bills-2">
+        {/* Ссылка с изображением */}
+        <Link to={`/bills/${bill.id}`}>
             <img
-              src={isMock ? (mockImage as string) : bill.image}
-              className="image-bills-6"
-              alt={bill.name || "Купюра"}
+                src={isMock ? mockImage as string : bill.image}
+                className="image-bills-2"
+                alt={bill.name || "Купюра"}
             />
-          </Link>
-          {/* Название купюры */}
-          <p className="bill-name-6">{bill.name}</p>
-        </div>
-      );
+        </Link>
+        {/* Название купюры */}
+        <p className="bill-name-2">{bill.name}</p>
+    </div>
+  );
 };
 
 export default BillCard;

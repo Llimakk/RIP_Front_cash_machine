@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import { T_Bill } from '../../modules/types';
-import {Col, Container, Row} from "reactstrap";
+import {Container} from "reactstrap";
 import { BillMocks } from '../../modules/mocks';
 import mockImage from "../../assets/mock.png";
 import './index.css';
@@ -51,26 +51,32 @@ const BillPage = ({selectedBill, setSelectedBill, isMock, setIsMock}: BillPagePr
     }
 
     return (
-        <Container className="container-4">
-            <Row>
-                <Col md="6">
+        <Container>
+            <div className="bill-container">
+                {/* Левая сторона: Изображение и дата */}
+                <div className="bill-image-container">
                     <img
                         alt=""
-                        src={isMock ? (mockImage as string) : selectedBill.image}
-                        className="w-100 img-4"
+                        src={isMock ? mockImage as string : selectedBill.image}
+                        className="bill-image"
                     />
-                    <p className="fs-5-4">Дата ввода в обращение: {selectedBill.year}.</p>
-                </Col>
-                <Col md="6">
-                    <h1 className="mb-3-4">{selectedBill.name}</h1>
-                    <p className="fs-5-4">Описание:</p>
-                    {selectedBill.description.split("t").map((desc, index) => (
-                    <li key={index} className="fs-5-4">{desc}</li>
-                    ))}
-                </Col>
-            </Row>
+                    <p className="bill-date">Дата ввода в обращение: {selectedBill.year}.</p>
+                </div>
+
+                {/* Правая сторона: Заголовок и описание */}
+                <div className="bill-details">
+                    <h1>{selectedBill.name}</h1>
+                    <p><strong>Описание:</strong></p>
+                    <ul>
+                        {selectedBill.description.split("t").map((desc, index) => (
+                            <li key={index}>{desc}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </Container>
     );
+    
 };
 
 export default BillPage

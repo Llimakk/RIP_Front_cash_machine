@@ -1,16 +1,16 @@
-.bills-6 {
-    border-radius: 20px;
+.bills-2 {
+    /* border-radius: 20px;
     background-color: #FFF;
     padding: 2%;
     margin-top: 20px;
     width: 350px;
-    height: 170px;
+    height: 170px; */
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
 
-.image-bills-6 {
+.image-bills-2 {
     width: 300px;
     height: 120px;
     margin-top: 1px;
@@ -18,7 +18,7 @@
     margin-right: auto;
 }
 
-.bill-name-6 {
+.bill-name-2 {
     font-size: 18px;
     display: flex;
     margin-top: 4%;
@@ -27,18 +27,18 @@
     font-family: SBSans, Arial, Helvetica, sans-serif;
 }
 
-.lin-6 {
+.lin {
     display: flex;
     flex-direction: row;
 }
 
-.picking-6 {
+.picking {
     width: 37px;
     height: 37px;
     margin-left: 80px;
 }
 
-.add-to-cart-button-6 {
+.add-to-cart-button {
     background: none;
     border: none;
     padding: 0;

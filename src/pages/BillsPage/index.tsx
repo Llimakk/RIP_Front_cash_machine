@@ -48,35 +48,33 @@ const BillsPage = ({ bills, setBills, isMock, setIsMock }: BillsPageProps) => {
     useEffect(() => {
         fetchData();
     }, []);
-
+    
     return (
-        <Container className="container-custom-3">
-            <Row className="justify-content-center mb-5">
-                {/* Центрируем ряд */}
-                <Col xs="12" md="8" lg="6">
-                {/* Центрируем содержимое и ограничиваем ширину */}
+        <Container className="container-custom">
+            <Row className="justify-content-center mb-5"> {/* Центрируем ряд */}
+                <Col xs="12" md="8" lg="6"> {/* Центрируем содержимое и ограничиваем ширину */}
                     <Form onSubmit={handleSubmit} className="d-flex">
                         <Input
                             value={billName}
                             onChange={(e) => dispatch(setBillName(e.target.value))}
                             placeholder="Поиск..."
-                            className="me-2 search-input-3"
+                            className="me-2 search-input"
                         />
-                        <Button color="primary" className="search-button-3">
+                        <Button color="primary" className="search-button">
                             Поиск
                         </Button>
                     </Form>
                 </Col>
             </Row>
-            <Row>
+            <div className="bill-grid">
                 {bills?.map((bill) => (
-                    <Col key={bill.id} xs="12" sm="6" md="4" className="bill-card-col-3">
+                    <div key={bill.id} className="bill-card-col-3">
                         <BillCard bill={bill} isMock={isMock} />
-                    </Col>
-                ))}
-            </Row>
+                    </div>
+                 ))}
+            </div>
         </Container>
-    );    
+    );   
 };
 
 export default BillsPage;
