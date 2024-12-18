@@ -2,12 +2,14 @@ import { Button, Col, Container, Form, Input, Row } from "reactstrap";
 import { T_Bill } from "../../modules/types";
 import BillCard from "../../components/BillCard";
 import { BillMocks } from "../../modules/mocks";
-import { FormEvent, useEffect } from "react";
+import { FormEvent, useEffect,useState } from "react";
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "src/store";
-import { setBillName } from "src/searchSlice";
+import { setBillName } from "src/slices/searchSlice";
 import "./index.css";
+// import { api } from "src/api";
+import cashhand from "../../assets/cashhand.png"
 
 type BillsPageProps = {
     bills: T_Bill[],
@@ -19,6 +21,7 @@ type BillsPageProps = {
 const BillsPage = ({ bills, setBills, isMock, setIsMock }: BillsPageProps) => {
     const billName = useSelector((state: RootState) => state.search.billName);
     const dispatch = useDispatch();
+    const [counter, setCounter] = useState(0);
 
     const fetchData = async () => {
         try {
@@ -31,6 +34,10 @@ const BillsPage = ({ bills, setBills, isMock, setIsMock }: BillsPageProps) => {
         }
     }
     
+    const incrementCounter = () => {
+        setCounter(prev => prev + 1);
+      };
+
     const createMocks = () => {
         setIsMock(true);
         setBills(BillMocks.filter(bill => bill.name.toLowerCase().includes(billName.toLowerCase())));
@@ -51,9 +58,10 @@ const BillsPage = ({ bills, setBills, isMock, setIsMock }: BillsPageProps) => {
     
     return (
         <Container className="container-custom">
-            <Row className="justify-content-center mb-5"> {/* Центрируем ряд */}
-                <Col xs="12" md="8" lg="6"> {/* Центрируем содержимое и ограничиваем ширину */}
-                    <Form onSubmit={handleSubmit} className="d-flex">
+            <Row className="mb-5"> {/* Центрируем ряд */}
+                <div className="contt">
+                    {/* Форма поиска */}
+                    <Form onSubmit={handleSubmit} className="search-form d-flex align-items-center justify-content-between flex-wrap">
                         <Input
                             value={billName}
                             onChange={(e) => dispatch(setBillName(e.target.value))}
@@ -63,16 +71,23 @@ const BillsPage = ({ bills, setBills, isMock, setIsMock }: BillsPageProps) => {
                         <Button color="primary" className="search-button">
                             Поиск
                         </Button>
+                        <div className="basket-container position-relative">
+                            <img src={cashhand} alt="Корзина" className="basket"/>
+                            <span className="position-absolute basket-counter">{counter}</span>
+                        </div>
                     </Form>
-                </Col>
+
+                    {/* Контейнер корзины с красным счётчиком */}
+                    
+                </div>
             </Row>
-            <div className="bill-grid">
+            <Row className="bill-grid gx-3 gy-4">
                 {bills?.map((bill) => (
-                    <div key={bill.id} className="bill-card-col-3">
-                        <BillCard bill={bill} isMock={isMock} />
-                    </div>
+                    <Col key={bill.id} xs="12" sm="6" md="4" lg="3" className="bill-card">
+                        <BillCard bill={bill} isMock={isMock} onAdd={incrementCounter} />
+                    </Col>
                  ))}
-            </div>
+            </Row>
         </Container>
     );   
 };

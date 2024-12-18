@@ -38,9 +38,22 @@
     margin-left: 80px;
 }
 
-.add-to-cart-button {
+/* .add-to-cart-button {
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
+} */
+
+.add-pick {
+    display: flex;
+    margin-top: 4%;
+    width: 35px;
+    height: 35px;
+    margin-right: 15px;
+}
+
+.card-di {
+    display: flex; 
+    justify-content: space-between;
 }

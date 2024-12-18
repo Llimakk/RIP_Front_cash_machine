@@ -1,0 +1,95 @@
+
+  /* Контейнеры */
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+  
+.profile-header h1 {
+    font-size: 32px;
+    color: #006400; /* Зеленый */
+    text-align: center;
+}
+  
+.profile-welcome .profile-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+  
+.profile-welcome .profile-card ul {
+    padding: 0;
+    list-style: none;
+}
+  
+.profile-welcome .profile-card li {
+    font-size: 16px;
+    margin: 8px 0;
+}
+  
+.profile-welcome .profile-card strong {
+    font-weight: bold;
+    color: #333;
+}
+  
+  /* Форма обновления данных */
+.profile-update {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+  
+.profile-update h2 {
+    font-size: 24px;
+    color: #006400; /* Зеленый */
+}
+  
+.profile-update .form-group label {
+    font-size: 16px;
+    color: #006400; /* Зеленый */
+    margin-bottom: 8px;
+}
+  
+.profile-update .input {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+  
+.profile-update .input:focus {
+    outline: none;
+    border-color: #006400; /* Зеленый */
+}
+  
+.profile-update .btn {
+    background-color: #006400; /* Зеленый */
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    padding: 12px 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.profile-update .btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+  
+.profile-update .btn:hover:enabled {
+    background-color: #004d00; /* Темный зеленый для наведения */
+}
+  
+  /* Статус ошибки */
+.text-danger {
+    color: #e74c3c;
+    font-size: 14px;
+}
+  

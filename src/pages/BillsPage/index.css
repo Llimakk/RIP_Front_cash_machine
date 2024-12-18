@@ -4,10 +4,28 @@
   padding-bottom: 2rem;
   justify-content: center;
   text-align: center;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
-/* Стили для строки поиска */
+.contt{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .search-input {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   border: 1px solid #ced4da; /* Светло-серая рамка */
   border-radius: 0.375rem; /* Закругленные углы */
@@ -29,6 +47,9 @@
 }
 
 .bill-grid {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Три равные колонки */
   gap: 20px; /* Отступ между элементами */
@@ -48,4 +69,38 @@
 .bill-card-col-3 .card-custom {
   max-width: 300px; /* Ограничиваем ширину карточек */
   width: 100%;
+}
+
+.basket-container {
+  margin-left: 50px;
+  position: relative; /* Для позиционирования дочернего счетчика */
+  width: 40px; /* Ширина контейнера */
+  height: 40px; /* Высота контейнера */
+  display: inline-block;
+}
+
+/* Иконка корзины */
+.basket {
+  width: 100%; /* Полностью заполняет контейнер */
+  height: 100%; /* Пропорциональное заполнение контейнера */
+  object-fit: contain; /* Сохранение пропорций изображения */
+}
+
+img.basket {
+  margin:0;
+}
+/* Счетчик в правом нижнем углу */
+.basket-counter {
+  position: absolute;
+  bottom: -5px; /* Сдвигаем чуть ниже границы */
+  right: -5px; /* Сдвигаем чуть правее границы */
+  background-color: red; /* Красный фон */
+  color: white; /* Белый текст */
+  border-radius: 50%; /* Делаем круглый счетчик */
+  width: 18px; /* Размер круга */
+  height: 18px;
+  font-size: 12px; /* Размер шрифта */
+  text-align: center;
+  line-height: 18px; /* Центрирование текста по вертикали */
+  font-weight: bold; /* Жирный текст */
 }

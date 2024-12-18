@@ -7,6 +7,9 @@ import { Route, Routes } from "react-router-dom";
 import { T_Bill } from "./modules/types";
 import { Container, Row } from "reactstrap";
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage/login";
+import RegistrationPage from "./pages/RegistrationPage/registration";
+import ProfilePage from "./pages/ProfilePage/profile";
 import "./App.css"; 
 
 function App() {
@@ -26,6 +29,16 @@ function App() {
                         <Route path="/" element={<HomePage />} />
                         <Route path="/bills/" element={<BillsPage bills={bills} setBills={setBills} isMock={isMock} setIsMock={setIsMock}/>} />
                         <Route path="/bills/:id" element={<BillPage selectedBill={currentBill} setSelectedBill={setSelectedBill} isMock={isMock} setIsMock={setIsMock}/>} />
+                        <Route path="/register" element={<RegistrationPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
+                        {/* <Route path="/operats" element={<OperatsPage />} /> */}
+                        {/* 
+                        
+                        <Route path="/users/:userId/update/" element={<EditUserPage />} />
+                        
+                        <Route path="/user_operats" element={<OperatsPage />} />
+                         */}
                     </Routes>
                 </Row>
             </Container>

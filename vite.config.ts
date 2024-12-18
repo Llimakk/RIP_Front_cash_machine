@@ -4,7 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-    base: "/Front_cash_machine",
+    base: "/Front_cash_machine/",
     server: {
         host: true,
         port: 3000,

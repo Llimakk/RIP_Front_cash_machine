@@ -73,3 +73,42 @@ body{
     color: #28a745; /* Зеленый для текущей страницы */
     border-bottom: none; /* Убираем подчёркивание */
 }
+
+.user-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+  
+  /* Ссылка на личный кабинет с иконкой */
+.profile-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 5px;
+    transition: transform 0.2s ease;
+}
+  
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+  
+.profile-link:hover {
+    transform: scale(1.1);
+}
+  
+  /* Ссылка на Вход/Регистрацию */
+.auth-link {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0056b3; /* Цвет ссылки */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+  
+.auth-link:hover {
+    color: #003d82; /* Затемнение при наведении */
+}
