@@ -1,53 +1,71 @@
-import { useState, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import "./login.css";
-import { useDispatch, useSelector } from "react-redux";
+import { api } from "src/api";
+import { useDispatch } from "react-redux";
+import { setSessionId } from "../../slices/userSlice";
+import { setCookie } from "src/slices/cookieSlice";
 import { useNavigate } from "react-router-dom";
-import { loginUser, resetLoginState } from "src/slices/loginSlice";
-import { RootState } from "src/store";
 
-// import React, { useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { loginUser, resetLoginState } from "../slices/loginSlice";
-// import { RootState } from "../store";
-// import { useNavigate } from "react-router-dom";
-// import "./login.css";
+export const LoginPage: FC = () => {
+  const dispatch = useDispatch();
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
-const LoginPage: React.FC = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
 
-  const dispatch = useDispatch<any>();
-  const { loading, error, success, userData } = useSelector(
-    (state: RootState) => state.login
-  );
-  const navigate = useNavigate();
-
+  // Проверяем наличие session_id при загрузке
   useEffect(() => {
-    if (success && userData) {
-      alert("Вход выполнен успешно!");
-      console.log("Данные пользователя:", userData);
-      navigate("/"); // Переход на главную страницу
-      dispatch(resetLoginState());
+    const sessionCookie = document.cookie
+      .split(";")
+      .find((row) => row.trim().startsWith("session_id="));
+    if (sessionCookie) {
+      navigate("/profile"); // Переход на страницу профиля, если сессия есть
     }
-  }, [success, userData, navigate, dispatch]);
+  }, [navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(loginUser(formData));
+    api.users
+      .usersLoginCreate(formData)
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("Login successful");
+  
+          // Извлекаем session_id из cookie
+          const sessionIdCookie = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("session_id="));
+  
+          if (sessionIdCookie) {
+            const sessionId = sessionIdCookie.split("=")[1];
+            dispatch(setSessionId(sessionId)); // Обновляем Redux-состояние
+            navigate("/");
+          } else {
+            console.error("Session ID not found in cookies");
+          }
+        } else {
+          console.log("Login failed");
+          setError(true);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      });
   };
-
 
   return (
     <div className="login-page-container">
       <div className="login-form-wrapper">
-        <h1 className="login-header">Вход</h1>
+        <h1 className="login-header">Войти</h1>
         <form onSubmit={handleSubmit}>
           <div className="login-input-group">
             <label htmlFor="username" className="login-label">
@@ -57,11 +75,11 @@ const LoginPage: React.FC = () => {
               type="text"
               id="username"
               name="username"
+              required
               value={formData.username}
               onChange={handleChange}
               className="login-input"
               placeholder="Введите логин"
-              required
             />
           </div>
           <div className="login-input-group">
@@ -72,24 +90,21 @@ const LoginPage: React.FC = () => {
               type="password"
               id="password"
               name="password"
+              required
               value={formData.password}
               onChange={handleChange}
               className="login-input"
               placeholder="Введите пароль"
-              required
             />
           </div>
-          {error && <div className="login-error-message">{error}</div>}
-          <button
-            type="submit"
-            className="login-submit-button"
-            disabled={loading}
-          >
-            {loading ? "Загрузка..." : "Войти"}
+          {error && (
+            <div className="login-error-message">Ошибка входа. Проверьте данные.</div>
+          )}
+          <button type="submit" className="login-submit-button">
+            Войти
           </button>
         </form>
         <div className="login-register-wrapper">
-          <p>Нет аккаунта?</p>
           <button
             className="login-register-button"
             onClick={() => navigate("/register")}

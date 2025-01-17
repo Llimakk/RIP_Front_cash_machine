@@ -1,0 +1,64 @@
+.card-operat {
+    background-color: #ffffff; /* Белый фон */
+    border-radius: 8px; /* Сглаженные углы */
+    border: 1px solid #e1e7e1; /* Легкая рамка */
+    padding: 20px; /* Внутренние отступы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    max-width: 350px; /* Ограничение максимальной ширины */
+    margin: 15px; /* Отступы от других элементов */
+    font-family: SBSans, Arial, Helvetica, sans-serif; /* Шрифт в стиле Сбербанка */
+  }
+  
+  .card-operat h3 {
+    font-size: 18px; /* Размер заголовка */
+    font-weight: bold; /* Жирный текст */
+    color: #2b3a32; /* Темный оттенок зелёного */
+    margin-bottom: 10px; /* Отступ снизу */
+  }
+  
+  .card-operat p {
+    font-size: 14px; /* Размер текста */
+    color: #5f6b6d; /* Светло-серый цвет текста */
+    line-height: 1.6; /* Межстрочный интервал */
+    margin: 5px 0; /* Отступы сверху и снизу для абзацев */
+  }
+  
+  .card-operat p strong {
+    color: #2b3a32; /* Цвет для жирных текстов (заголовков внутри абзацев) */
+  }
+  
+  .card-operat .status {
+    font-weight: bold;
+    text-transform: capitalize; /* Делаем первый символ заглавным */
+  }
+  
+  .card-operat p:not(:last-child) {
+    border-bottom: 1px solid #e1e7e1; /* Разделительная линия между абзацами */
+    padding-bottom: 10px; /* Отступ снизу */
+  }
+  
+  .card-operat .status {
+    color: #4caf50; /* Цвет для статуса "Завершён" */
+  }
+  
+  .card-operat .status[data-status="2"] {
+    color: #ff9800; /* Цвет для статуса "В работе" */
+  }
+  
+  .card-operat .status[data-status="3"] {
+    color: #f44336; /* Цвет для статуса "Отклонён" */
+  }
+  
+  .card-operat .status[data-status="5"] {
+    color: #9e9e9e; /* Цвет для статуса "Удалён" */
+  }
+  
+  .card-operat-link {
+  text-decoration: none; /* Убираем подчеркивание у ссылки */
+  color: inherit; /* Наследуем цвет от родительского элемента */
+}
+
+.card-operat-link:hover {
+  color: #0056b3;
+  opacity: 0.8; /* Легкий эффект при наведении */
+}

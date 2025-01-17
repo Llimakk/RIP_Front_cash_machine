@@ -1,95 +1,112 @@
-
-  /* Контейнеры */
 .profile-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-  
-.profile-header h1 {
-    font-size: 32px;
-    color: #006400; /* Зеленый */
-    text-align: center;
+
+/* Заголовки */
+.profile-container h1, .profile-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #4a4a4a;
+  margin-bottom: 20px;
 }
-  
-.profile-welcome .profile-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
+
+.profile-container h2 {
+  font-size: 20px;
+  margin-top: 40px;
 }
-  
-.profile-welcome .profile-card ul {
-    padding: 0;
-    list-style: none;
+
+/* Секции данных */
+.profile-current-info {
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 30px;
 }
-  
-.profile-welcome .profile-card li {
-    font-size: 16px;
-    margin: 8px 0;
+
+.profile-current-info p {
+  font-size: 16px;
+  margin-bottom: 10px;
 }
-  
-.profile-welcome .profile-card strong {
-    font-weight: bold;
-    color: #333;
+
+.profile-current-info strong {
+  color: #666;
 }
-  
-  /* Форма обновления данных */
-.profile-update {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+
+/* Форма редактирования */
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-  
-.profile-update h2 {
-    font-size: 24px;
-    color: #006400; /* Зеленый */
+
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
 }
-  
-.profile-update .form-group label {
-    font-size: 16px;
-    color: #006400; /* Зеленый */
-    margin-bottom: 8px;
+
+.profile-edit-form label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
 }
-  
-.profile-update .input {
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 20px;
+
+.profile-edit-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  margin-top: 5px;
 }
-  
-.profile-update .input:focus {
-    outline: none;
-    border-color: #006400; /* Зеленый */
+
+.profile-edit-form input:focus {
+  border-color: #0078d4;
+  background-color: #ffffff;
+  outline: none;
 }
-  
-.profile-update .btn {
-    background-color: #006400; /* Зеленый */
-    color: #fff;
-    border-radius: 6px;
-    border: none;
-    padding: 12px 24px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+
+/* Кнопки */
+.profile-submit-button {
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #0078d4;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
-  
-.profile-update .btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+
+.profile-submit-button:hover {
+  background-color: #005fa3;
 }
-  
-.profile-update .btn:hover:enabled {
-    background-color: #004d00; /* Темный зеленый для наведения */
+
+.profile-submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
-  
-  /* Статус ошибки */
-.text-danger {
-    color: #e74c3c;
-    font-size: 14px;
+
+/* Кнопка выхода */
+.profile-logout-button {
+  background-color: #f44336;
+  margin-top: 10px;
 }
-  
+
+.profile-logout-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Сообщения */
+.profile-error-message {
+  color: #f44336;
+  margin-top: 20px;
+}
+
+
+

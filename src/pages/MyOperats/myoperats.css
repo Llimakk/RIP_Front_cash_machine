@@ -1,0 +1,81 @@
+/* Общие стили для страницы операций */
+.operats-page {
+    padding: 20px;
+    font-family: SBSans, Arial, Helvetica, sans-serif;
+  }
+  
+  .operats-page h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2b3a32; /* Тёмный зелёный для заголовков */
+    margin-bottom: 20px;
+  }
+  
+  /* Стиль для списка операций */
+  .operats-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+  
+  /* Стиль для карточки операции */
+  .card-operat {
+    background-color: #ffffff; /* Белый фон */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-operat:hover {
+    transform: translateY(-5px); /* Эффект подъема */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Усиленная тень при наведении */
+  }
+  
+  /* Стилизация заголовка операции */
+  .card-operat h3 {
+    font-size: 22px;
+    color: #2b3a32;
+    margin-bottom: 10px;
+  }
+  
+  .card-operat p {
+    font-size: 16px;
+    color: #666666; /* Тёмно-серый для текста */
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  /* Стили для статуса */
+  .card-operat p strong {
+    color: #2b3a32; /* Тёмный зелёный для сильных элементов */
+  }
+  
+  /* Стили для ошибки */
+  .error-message {
+    color: #ff4d4d;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Стили для текста "Загрузка..." */
+  .operats-page p {
+    font-size: 18px;
+    color: #2b3a32;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Стиль для пустого состояния */
+  .operats-page .operats-list p {
+    text-align: center;
+    font-size: 18px;
+    color: #666666;
+  }
+  
+.auth-warning {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e60000; /* Можно добавить цвет для акцента */
+}

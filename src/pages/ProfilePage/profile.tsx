@@ -1,124 +1,164 @@
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "store";
-import { checkSession, updateUserData, logoutUser } from "slices/userSlice"; // Импортируем необходимые экшены
-import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from "reactstrap";
+import { AppDispatch, RootState } from "src/store";
 import { useNavigate } from "react-router-dom";
+import "./profile.css"
+import { updateUserProfile, fetchUserData, logoutUserAsync } from "src/slices/userSlice";
+import { useState, useEffect } from "react";
 
 const ProfilePage: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
+  const { user, loading, error, isAuth } = useSelector((state: RootState) => state.user);
+  const { id_user } = useSelector((state: RootState) => state.cookie);
 
-  // Получаем состояние пользователя из Redux
-  const { login, isAuth, status, error, id_user } = useSelector(
-    (state: RootState) => state.user
-  );
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    password: "",
+  });
 
-  // Локальные состояния для формы
-  const [newLogin, setNewLogin] = useState<string>(login);
-  const [newPassword, setNewPassword] = useState<string>("");
+  const handleLogout = () => {
+    dispatch(logoutUserAsync())
+      .then(() => navigate("/")) // Переход на главную страницу при успешном выходе
+      .catch((err) => console.error("Ошибка выхода:", err)); // Просто логируем, без alert
+  };
 
-  // Проверка авторизации при монтировании компонента
-  // useEffect(() => {
-  //   dispatch(checkSession());
-  //   if (!isAuth) {
-  //     navigate("/login"); 
-  //   }
-  // }, [dispatch, isAuth, navigate]);
+  useEffect(() => {
+    if (isAuth && id_user) {
+      // Загружаем данные пользователя, если есть сессия и данные еще не загружены
+      dispatch(fetchUserData());
+    } else if (user) {
+      // Обновляем локальное состояние при изменении данных пользователя
+      setFormData({
+        username: user.username || "",
+        email: user.email || "",
+        first_name: user.first_name || "",
+        last_name: user.last_name || "",
+        password: "",
+      });
+    }
+  }, [dispatch, isAuth, id_user]);
 
-  // Обработчик отправки формы
-  const handleUpdate = async (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!id_user) {
-      console.error("User ID is not available.");
+    if (!user) {
+      alert("Пользователь не найден");
       return;
     }
 
-    const data: { login?: string; password?: string } = {};
-    if (newLogin !== login) data.login = newLogin;
-    if (newPassword) data.password = newPassword;
+    try {
+      await dispatch(
+        updateUserProfile({
+          userId: user.id,
+          data: formData,
+        })
+      ).unwrap();
 
-    await dispatch(updateUserData({ userId: id_user, data }));
-
-    if (status === "succeeded") {
-      alert("Данные успешно обновлены.");
-    } else {
-      alert("Ошибка обновления данных.");
+      alert("Данные успешно обновлены!");
+    } catch (err) {
+      console.error("Ошибка обновления профиля:", err);
+      alert("Не удалось обновить профиль");
     }
   };
 
-  // Логаут пользователя
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate("/login"); // После выхода редирект на страницу входа
-  };
-
-  if (status === "loading") {
-    return <div>Загрузка...</div>; // Можно добавить какой-то индикатор загрузки
-  }
-
   return (
-    <div>
-      <Container className="profile-container py-5">
-        <Row className="profile-header mb-4">
-          <Col>
-            <h1 className="text-center">Личный кабинет</h1>
-          </Col>
-        </Row>
-
-        {/* Блок приветствия */}
-        <Row className="profile-welcome justify-content-center">
-          <Col xs="12" sm="8" md="6">
-            <div
-              className="profile-card p-4 shadow"
-              style={{
-                backgroundColor: "#D0B175",
-                borderRadius: "10px",
-              }}
-            >
-              <h5 className="text-center mb-4">Добро пожаловать, {login}!</h5>
-              <ul className="list-unstyled">
-                <li>
-                  <strong>Логин:</strong> {login}
-                </li>
-                <li>
-                  <strong>Статус:</strong> {isAuth ? "Авторизован" : "Не авторизован"}
-                </li>
-              </ul>
+    <div className="profile-container">
+      <h1>Личный кабинет</h1>
+  
+      {loading && <p className="profile-loading">Загрузка...</p>}
+      {error && <p className="profile-error-message">Ошибка: {error}</p>}
+  
+      {isAuth ? (
+        <>
+          {/* Секция текущих данных */}
+          <div className="profile-current-info">
+            <h2>Текущие данные</h2>
+            <p>
+              <strong>Имя пользователя:</strong> {user?.username}
+            </p>
+            <p>
+              <strong>Электронная почта:</strong> {user?.email}
+            </p>
+            <p>
+              <strong>Имя:</strong> {user?.first_name}
+            </p>
+            <p>
+              <strong>Фамилия:</strong> {user?.last_name}
+            </p>
+          </div>
+  
+          {/* Форма редактирования */}
+          <form onSubmit={handleSubmit} className="profile-edit-form">
+            <h2>Редактирование профиля</h2>
+            <div className="profile-form-group">
+              <label>Имя пользователя</label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                placeholder="Введите новое имя пользователя"
+              />
             </div>
-          </Col>
-        </Row>
-      </Container>
-
-      {/* Форма обновления данных */}
-      <Container className="profile-update mt-5">
-        <h2>Обновить данные</h2>
-        {status === "failed" && <p className="text-danger">Ошибка: {error}</p>}
-        <Form onSubmit={handleUpdate}>
-          <FormGroup>
-            <Label for="newLogin">Новый логин</Label>
-            <Input
-              type="text"
-              id="newLogin"
-              value={newLogin}
-              onChange={(e) => setNewLogin(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="newPassword">Новый пароль</Label>
-            <Input
-              type="password"
-              id="newPassword"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </FormGroup>
-          {/* <Button color="primary" type="submit" disabled={status === "loading"}>
-            {status === "loading" ? "Обновление..." : "Сохранить изменения"}
-          </Button> */}
-        </Form>
-      </Container>
+            <div className="profile-form-group">
+              <label>Электронная почта</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Введите новую электронную почту"
+              />
+            </div>
+            <div className="profile-form-group">
+              <label>Имя</label>
+              <input
+                type="text"
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                placeholder="Введите новое имя"
+              />
+            </div>
+            <div className="profile-form-group">
+              <label>Фамилия</label>
+              <input
+                type="text"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                placeholder="Введите новую фамилию"
+              />
+            </div>
+            <div className="profile-form-group">
+              <label>Пароль</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Введите новый пароль"
+              />
+            </div>
+            <button type="submit" className="profile-submit-button" disabled={loading}>
+              Сохранить изменения
+            </button>
+            <button onClick={handleLogout} className="profile-logout-button">
+              Выйти из аккаунта
+            </button>
+          </form>
+        </>
+      ) : (
+        <p>Вы не авторизованы!</p>
+      )}
     </div>
   );
 };

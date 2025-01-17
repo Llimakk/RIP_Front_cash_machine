@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store"; 
 
 
+
 const Header = () => {
   const { isAuth } = useSelector((state: RootState) => state.user);
   
@@ -24,6 +25,11 @@ const Header = () => {
               <Link to="/bills" className="nav-link">
                 Купюры
               </Link>
+              {isAuth && (
+                <Link to="/my_operats" className="nav-link-formed">
+                  Сформированные операции
+                </Link>
+              )}
             </nav>
   
             {/* Условная кнопка */}

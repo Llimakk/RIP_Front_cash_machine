@@ -1,140 +1,152 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "src/store";
+import { setIdUserR } from "./cookieSlice";
 import axios from "axios";
-import { RootState } from "store";
-
-const selectSessionId = (state: RootState) => state.cookie.cookie;
-
-// Асинхронная проверка сессии
-export const checkSession = createAsyncThunk<
-  { login: string; id_user: number }, // успешный ответ
-  void, // без аргументов
-  { rejectValue: string; state: RootState } // ошибка + доступ к state
->(
-  "user/checkSession",
-  async (_, { rejectWithValue, getState }) => {
-    const sessionId = selectSessionId(getState());
-    if (!sessionId) {
-      return rejectWithValue("Сессия отсутствует");
-    }
-
-    try {
-      const response = await axios.get(`/api/auth/session`, {
-        headers: { Authorization: `Bearer ${sessionId}` },
-        withCredentials: true,
-      });
-      return response.data; // Пример: { login: "user", id_user: 123 }
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || "Ошибка проверки сессии");
-    }
-  }
-);
-
-// Асинхронное обновление данных пользователя
-export const updateUserData = createAsyncThunk<
-  { login: string }, // успешный ответ
-  { userId: number; data: { login?: string; password?: string } }, // аргументы
-  { rejectValue: string } // ошибка
->(
-  "user/updateUserData",
-  async ({ userId, data }, { rejectWithValue }) => {
-    try {
-      const response = await axios.put(`/api/users/${userId}`, data);
-      return response.data; // Ожидается, что ответ содержит обновленные данные пользователя
-    } catch (error: any) {
-      return rejectWithValue(
-        error.response?.data?.message || "Не удалось обновить данные пользователя"
-      );
-    }
-  }
-);
 
 interface UserState {
-  login: string;
+  user: {
+    id: number;
+    username: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    password: string;
+    // date_joined: Date;
+    // Дополнительные поля, которые есть в UserSerializer
+  } | null;
+  sessionId: string | null;
   isAuth: boolean;
-  status: "idle" | "loading" | "succeeded" | "failed";
+  loading: boolean;
   error: string | null;
-  cookie: string | null; // Cookie
-  id_user: number | null; // ID пользователя
 }
 
-// Функция получения cookie
-const getCookie = (): string | null => {
-  const cookie = document.cookie
-    .split(";")
-    .find((row) => row.trim().startsWith("session_id="));
-  return cookie ? cookie.split("=")[1] : null;
-};
-
-// Начальное состояние
 const initialState: UserState = {
-  login: "",
+  user: null,
+  sessionId: null,
   isAuth: false,
-  status: "idle",
+  loading: false,
   error: null,
-  cookie: getCookie(),
-  id_user: null,
 };
 
-// Слайс пользователя
+export const fetchUserData = createAsyncThunk(
+  "user/fetchData",
+  async (_, { dispatch, getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+    const sessionId = state.cookie.cookie;
+    const userId = state.cookie.id_user;
+
+    if (!sessionId) {
+      console.error("Нет sessionId");
+      return rejectWithValue("Пользователь не авторизован");
+    }
+
+    if (!userId) {
+      console.error("Нет userId");
+      return rejectWithValue("ID пользователя отсутствует");
+    }
+
+    try {
+      console.log("Отправка запроса на сервер...");
+      const response = await axios.get(`/api/users/${userId}/update/`, {
+        headers: {
+          Authorization: `Session ${sessionId}`,
+        },
+        withCredentials: true,
+      });
+
+      return response.data; // Возвращаем данные пользователя
+    } catch (error: any) {
+      console.error("Ошибка загрузки данных:", error.response?.data || error.message);
+      return rejectWithValue(error.response?.data || "Ошибка загрузки данных");;
+    }
+  }
+);
+
+
+export const updateUserProfile = createAsyncThunk(
+  "user/updateProfile",
+  async (
+    { userId, data }: { userId: number; data: { [key: string]: any } },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await axios.put(`/api/users/${userId}/update/`, data, {
+        withCredentials: true, // Для отправки cookies с запросом
+      });
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || "Ошибка при обновлении профиля");
+    }
+  }
+);
+
 const userSlice = createSlice({
-  name: "userAuth",
+  name: "user",
   initialState,
   reducers: {
-    loginUser: (state, action: PayloadAction<{ login: string; id_user: number }>) => {
-      state.login = action.payload.login;
+    setUser: (state, action: PayloadAction<UserState["user"]>) => {
+      state.user = action.payload;
       state.isAuth = true;
-      state.id_user = action.payload.id_user;
     },
     logoutUser: (state) => {
-      state.login = "";
+      state.user = null;
       state.isAuth = false;
-      state.id_user = null;
-      state.cookie = null;
-      document.cookie = `session_id=; Max-Age=0; path=/;`; // Удаление cookie
     },
-    setIdUser: (state, action: PayloadAction<number>) => {
-      state.id_user = action.payload;
+    setSessionId: (state, action: PayloadAction<string | null>) => {
+      state.sessionId = action.payload;
+      state.isAuth = !!action.payload; // Обновляем isAuth на основе sessionId
     },
-    setCookie: (state, action: PayloadAction<string>) => {
-      state.cookie = action.payload;
+    clearSession: (state) => {
+      state.sessionId = null;
+      state.isAuth = false;
     },
   },
   extraReducers: (builder) => {
     builder
-      // Проверка сессии
-      .addCase(checkSession.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(checkSession.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.login = action.payload.login;
-        state.id_user = action.payload.id_user;
-        state.isAuth = true;
-      })
-      .addCase(checkSession.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload || "Ошибка проверки сессии";
-        state.isAuth = false;
-      })
-
-      // Обновление данных пользователя
-      .addCase(updateUserData.pending, (state) => {
-        state.status = "loading";
+      .addCase(fetchUserData.pending, (state) => {
+        state.loading = true;
         state.error = null;
       })
-      .addCase(updateUserData.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.login = action.payload.login;
+      .addCase(fetchUserData.fulfilled, (state, action) => {
+        console.log("Данные пользователя обновлены:", action.payload);
+        state.user = action.payload;
+        state.isAuth = true; // Считаем, что пользователь авторизован
+        state.loading = false;
       })
-      .addCase(updateUserData.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload || "Ошибка при обновлении данных";
+      .addCase(fetchUserData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.user = action.payload;
+        alert("Профиль успешно обновлен!");
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        console.error("Ошибка обновления профиля:", action.payload);
+        alert("Ошибка обновления профиля!");
       });
   },
 });
 
-export const { loginUser, logoutUser, setIdUser, setCookie } = userSlice.actions;
+export const logoutUserAsync = createAsyncThunk(
+  "user/logoutUserAsync",
+  async (_, { dispatch }) => {
+    try {
+      const response = await axios.post("/api/users/logout/", {}, {
+        withCredentials: true,
+      });
 
+      if (response.status === 200) {
+        // Успешный выход
+        dispatch(logoutUser());
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Ошибка при выходе:", error); // Просто логируем, не нужно показывать alert
+    }
+  }
+);
+
+export const { setUser, logoutUser, setSessionId, clearSession } = userSlice.actions;
 export default userSlice.reducer;
-
 export type { UserState };

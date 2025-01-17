@@ -46,15 +46,21 @@ body{
     object-fit: contain; /* Подгонка изображения */
 }
 
+
+
 .header-nav {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Центрируем "Купюры" */
     align-items: center;
-    height: 100%; /* Занимает всю высоту зелёной полосы */
+    position: relative; /* Для позиционирования "Сформированных операций" */
+    width: 100%; /* На всю ширину хедера */
 }
 
 /* Ссылка на "Купюры" */
 .nav-link {
+    position: absolute; /* Абсолютное позиционирование */
+    left: 50%; /* Центрирование относительно родителя */
+    transform: translateX(-50%);
     font-size: 20px; /* Увеличиваем размер шрифта */
     font-weight: bold; /* Делаем шрифт жирным */
     color: #000000; /* Чёрный цвет текста */
@@ -72,6 +78,22 @@ body{
 .nav-link.active {
     color: #28a745; /* Зеленый для текущей страницы */
     border-bottom: none; /* Убираем подчёркивание */
+}
+
+.nav-link-formed{
+    position: absolute; /* Абсолютное позиционирование */
+    left: calc(50% + 190px);
+    font-size: 20px; /* Увеличиваем размер шрифта */
+    font-weight: bold; /* Делаем шрифт жирным */
+    color: #000000; /* Чёрный цвет текста */
+    font-family: SBSans, Arial, Helvetica, sans-serif; /* Используем стильный шрифт */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-link-formed:hover {
+    color: #0056b3; /* Синий при наведении */
+    text-shadow: 0 0 8px rgba(0, 91, 187, 0.4); /* Легкий эффект свечения */
 }
 
 .user-container {

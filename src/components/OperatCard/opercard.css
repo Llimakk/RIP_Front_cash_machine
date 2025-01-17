@@ -1,0 +1,102 @@
+/* opercard.css */
+.operat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9fdf9; /* Светлый фон */
+  border: 1px solid #cdd8d4; /* Лёгкая граница */
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+.operat-card-image img {
+  width: 190px; /* Увеличенный размер фото */
+  height: auto;
+  border-radius: 8px;
+  margin-left: 40px;
+  margin-bottom: 5px;
+}
+
+.operat-card-info {
+  flex: 1; /* Занимает всё доступное пространство */
+  margin: 0 70px; /* Отступы между блоками */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-left: 2px solid #d6e6d4; /* Вертикальное разделение */
+  border-right: 2px solid #d6e6d4; /* Вертикальное разделение */
+  padding: 5px; /* Внутренний отступ */
+}
+
+.operat-card-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4a654a; /* Тёмно-зелёный текст */
+}
+
+.operat-card-count {
+  min-width: 80px; /* Фиксированная ширина для блока количества */
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2b3a32; /* Цвет текста */
+}
+
+.operat-card-count p {
+  margin: 0;
+  padding: 5px;
+  margin-right: 50px;
+  background-color: #eff8f0; /* Светлый фон */
+  border-radius: 8px;
+  border: 1px solid #cdd8d4; /* Лёгкая рамка */
+}
+
+.operat-card-count input {
+  width: 60px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #cdd8d4;
+  border-radius: 4px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+/* Стили для кнопки сохранения */
+.operat-card-count button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #007b4f; /* Зелёный цвет Сбербанка */
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.operat-card-count button:hover {
+  background-color: #00593c; /* Тёмный зелёный при наведении */
+}
+
+.operat-card-count button:disabled {
+  background-color: #cdd8d4; /* Серый цвет для отключённой кнопки */
+  cursor: not-allowed;
+}
+
+.delete-bill-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-bill-button:hover {
+  background-color: #b71c1c;
+}
