@@ -1,0 +1,9 @@
+.search-cont{
+    display: flex; /* Делаем контейнер flex-контейнером */
+    align-items: center; /* Выравниваем элементы по вертикали (опционально) */
+    gap: 10px;
+}
+
+.search-str{
+    margin-left: 250px;
+}

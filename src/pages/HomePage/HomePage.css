@@ -1,0 +1,41 @@
+.homepage-container {
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+}
+
+
+.homepage-logo {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+
+.homepage-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1A1A1A;
+}
+
+
+.homepage-description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+    text-align: center;
+    align-items: center;
+}
+
+
+.homepage-button {
+    width: 150px;
+    height: 50px;
+    font-size: 1rem;
+    margin: 10px;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.homepage-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

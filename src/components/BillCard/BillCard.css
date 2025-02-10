@@ -1,0 +1,114 @@
+.bills-2 {
+    /* border-radius: 20px;
+    background-color: #FFF;
+    padding: 2%;
+    margin-top: 20px;
+    width: 350px;
+    height: 170px; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.image-bills-2 {
+    width: 300px;
+    height: 130px;
+    margin-top: 1px;
+    margin-left: 25px;
+    margin-right: auto;
+}
+
+.bill-name-2 {
+    font-size: 18px;
+    display: flex;
+    margin-top: 4%;
+    font-weight: 500;
+    margin-left: 25px;
+    font-family: SBSans, Arial, Helvetica, sans-serif;
+}
+
+.lin {
+    display: flex;
+    flex-direction: row;
+}
+
+.picking {
+    width: 37px;
+    height: 37px;
+    margin-left: 80px;
+}
+
+/* .add-to-cart-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+} */
+
+.add{
+    display: flex;
+    margin-right: 40px;
+}
+
+.add-pick {
+    display: flex;
+    margin-top: 4%;
+    width: 35px;
+    height: 35px;
+}
+
+.card-di {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.bill-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Отступ между карточкой и кнопкой */
+}
+
+.bill-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.bill-card:hover {
+    transform: scale(1.02);
+}
+
+.bill-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.bill-image {
+    width: 30%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 12px;
+}
+
+.bill-name {
+    margin-left: 10%;
+    width: 40%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.bill-input {
+    width: 30%;
+}
+
+.bill-remove {
+    margin-left: 15px;
+}
